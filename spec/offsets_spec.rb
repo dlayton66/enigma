@@ -2,6 +2,7 @@ require './lib/offsets'
 
 RSpec.describe Offsets do
   let(:offsets) { Offsets.new }
+  let(:offsets_arg) { Offsets.new("040895")}
   
   it 'exists' do
     expect(offsets).to be_a Offsets
@@ -13,8 +14,6 @@ RSpec.describe Offsets do
   end
 
   it 'can generate a master_offset with a date argument' do
-    offsets_arg = Offsets.new("040895")
-
     expect(offsets_arg.master_offset).to eq "1025"
   end
 
@@ -24,12 +23,19 @@ RSpec.describe Offsets do
     expect(offsets.c.size).to eq 1
     expect(offsets.d.size).to eq 1
   end
-
+  
   describe '#format' do
     it 'converts a Time object to a date string' do
       date = Time.new(2002, 10, 31)
-
+      
       expect(offsets.format(date)).to eq "311002"
+    end
+  end
+  
+  describe '#calculate_master_offset' do
+    it 'calculates master_offset from a date' do
+      expect(offsets.calculate_master_offset("040895")).to eq "1025"
+      expect(offsets.calculate_master_offset("311002")).to eq "4004"
     end
   end
 
