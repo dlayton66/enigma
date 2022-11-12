@@ -8,15 +8,15 @@ RSpec.describe Keys do
   end
 
   it 'contains four 2-digit keys' do
-    expect(keys.a_key.size).to eq 2
-    expect(keys.b_key.size).to eq 2
-    expect(keys.c_key.size).to eq 2
-    expect(keys.d_key.size).to eq 2
+    expect(keys.a.size).to eq 2
+    expect(keys.b.size).to eq 2
+    expect(keys.c.size).to eq 2
+    expect(keys.d.size).to eq 2
   end
 
   it 'has keys that share some digits' do
-    expect(keys.a_key[1]).to eq(keys.b_key[0])
-    expect(keys.b_key[1]).to eq(keys.c_key[0])
-    expect(keys.c_key[1]).to eq(keys.d_key[0])
+    expect(keys.a[1]).to eq(keys.b[0])
+    expect(keys.b[1]).to eq(keys.c[0])
+    expect(keys.c[1]).to eq(keys.d[0])
   end
 end
