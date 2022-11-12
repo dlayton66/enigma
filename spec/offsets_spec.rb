@@ -7,11 +7,29 @@ RSpec.describe Offsets do
     expect(offsets).to be_a Offsets
   end
 
+  it 'generates a 4-digit string master_offset by default' do
+    expect(offsets.master_offset.size).to eq 4
+    expect(offsets.master_offset.class).to eq String
+  end
+
+  it 'can generate a master_offset with a date argument' do
+    offsets_arg = Offsets.new("040895")
+
+    expect(offsets_arg.master_offset).to eq "1025"
+  end
+
   it 'contains four 1-digit offsets' do
     expect(offsets.a.size).to eq 1
     expect(offsets.b.size).to eq 1
     expect(offsets.c.size).to eq 1
     expect(offsets.d.size).to eq 1
+  end
+
+  describe '#date_string' do
+    it 'converts a Time object to a date string' do
+      date = Time.new(2002, 10, 31)
+      expect(offsets.date_string(date)).to eq "311002"
+    end
   end
 
   describe '#digits' do

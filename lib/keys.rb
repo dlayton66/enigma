@@ -1,11 +1,12 @@
 class Keys
-  attr_reader :a,
+  attr_reader :master_key,
+              :a,
               :b,
               :c,
               :d
 
-  def initialize
-    @master_key = rand(0...99999).to_s.rjust(5,"0")
+  def initialize(master_key = rand(0...99999).to_s.rjust(5,"0"))
+    @master_key = master_key
     @a = @master_key[0..1]
     @b = @master_key[1..2]
     @c = @master_key[2..3]

@@ -1,15 +1,20 @@
 class Offsets
-  attr_reader :a,
+  attr_reader :master_offset,
+              :a,
               :b,
               :c,
               :d
 
-  def initialize
-    @master_offset = (Time.now.strftime("%d%m%y").to_i**2).to_s[-4..-1]
+  def initialize(date_string = date_string(Time.now))
+    @master_offset = (date_string.to_i**2).to_s[-4..-1]
     @a = @master_offset[0]
     @b = @master_offset[1]
     @c = @master_offset[2]
     @d = @master_offset[3]
+  end
+
+  def date_string(date)
+    date.strftime("%d%m%y")
   end
   
   def digits
