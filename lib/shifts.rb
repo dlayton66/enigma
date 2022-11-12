@@ -1,13 +1,13 @@
 require './lib/keys'
 require './lib/offsets'
 
-class Encrypter
-  attr_reader :shifts, :keys, :offsets
+class Shifts
+  attr_reader :digits, :keys, :offsets
 
   def initialize
     @keys = Keys.new
     @offsets = Offsets.new
-    @shifts = calculate_shifts
+    @digits = calculate_shifts
   end
 
   def calculate_shifts
