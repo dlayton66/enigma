@@ -13,4 +13,14 @@ RSpec.describe Offsets do
     expect(offsets.c.size).to eq 1
     expect(offsets.d.size).to eq 1
   end
+
+  describe '#digits' do
+    it 'returns an array of keys in integer form' do
+      expect(offsets.digits.class).to eq Array
+      expect(offsets.digits[0].class).to eq Integer
+      expect(offsets.digits[1].class).to eq Integer
+      expect(offsets.digits[2].class).to eq Integer
+      expect(offsets.digits[3].class).to eq Integer
+    end
+  end
 end

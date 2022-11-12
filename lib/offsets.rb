@@ -11,4 +11,8 @@ class Offsets
     @c = @master_offset[2]
     @d = @master_offset[3]
   end
+  
+  def digits
+    [@a.to_i,@b.to_i,@c.to_i,@d.to_i]
+  end
 end

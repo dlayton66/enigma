@@ -12,4 +12,7 @@ class Keys
     @d = @master_key[3..4]
   end
   
+  def digits
+    [@a.to_i,@b.to_i,@c.to_i,@d.to_i]
+  end
 end
