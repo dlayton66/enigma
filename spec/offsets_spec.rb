@@ -28,6 +28,7 @@ RSpec.describe Offsets do
   describe '#date_string' do
     it 'converts a Time object to a date string' do
       date = Time.new(2002, 10, 31)
+      
       expect(offsets.date_string(date)).to eq "311002"
     end
   end

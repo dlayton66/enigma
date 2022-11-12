@@ -5,12 +5,16 @@ class Keys
               :c,
               :d
 
-  def initialize(master_key = rand(0...99999).to_s.rjust(5,"0"))
+  def initialize(master_key = format(rand(0...99999)))
     @master_key = master_key
     @a = @master_key[0..1]
     @b = @master_key[1..2]
     @c = @master_key[2..3]
     @d = @master_key[3..4]
+  end
+
+  def format(num)
+    num.to_s.rjust(5,"0")
   end
   
   def digits

@@ -31,6 +31,14 @@ RSpec.describe Keys do
     expect(keys.c[1]).to eq(keys.d[0])
   end
 
+  describe '#format' do
+    it 'converts a number into a 5-digit string with padded zeroes' do
+      expect(keys.format(45)).to eq "00045"
+      expect(keys.format(5023)).to eq "05023"
+      expect(keys.format(52058)).to eq "52058"
+    end
+  end
+
   describe '#digits' do
     it 'returns an array of keys in integer form' do
       expect(keys.digits.class).to eq Array
