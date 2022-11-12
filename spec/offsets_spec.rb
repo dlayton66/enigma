@@ -15,7 +15,7 @@ RSpec.describe Offsets do
   end
 
   describe '#digits' do
-    it 'returns an array of keys in integer form' do
+    it 'returns an array of offsets in integer form' do
       expect(offsets.digits.class).to eq Array
       expect(offsets.digits[0].class).to eq Integer
       expect(offsets.digits[1].class).to eq Integer
