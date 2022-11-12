@@ -1,23 +1,25 @@
 require './lib/shifts'
 
 RSpec.describe Shifts do
-  let(:shifts) { Shifts.new }
+  let(:shifts) { Shifts.new(nil,nil) }
 
   it 'exists' do
     expect(shifts).to be_a Shifts
   end
 
-  it 'can take 1 argument for master_key' do
-    shifts_one_arg = Shifts.new("02715")
+  it 'can take 2 arguments for seed and date_seed' do
+    shifts1 = Shifts.new("02715","040895")
+    expect(shifts1.seed).to eq "02715"
+    expect(shifts1.date_seed).to eq "040895"
 
-    expect(shifts_one_arg.keys.master_key).to eq "02715"
-  end
+    shifts2 = Shifts.new(nil,"040895")
+    expect(shifts2.seed).to be nil
+    expect(shifts2.date_seed).to eq "040895"
 
-  it 'can take 2 arguments for master_key and date' do
-    shifts_two_arg = Shifts.new("02715","040895")
+    shifts3 = Shifts.new("02715",nil)
+    expect(shifts3.seed).to eq "02715"
+    expect(shifts3.date_seed).to be nil
 
-    expect(shifts_two_arg.keys.master_key).to eq "02715"
-    expect(shifts_two_arg.offsets.master_offset).to eq "1025"
   end
 
   describe '#calculate_shifts' do

@@ -1,24 +1,26 @@
 class Offsets
-  attr_reader :master_offset,
+  attr_reader :date_seed,
+              :seed,
               :a,
               :b,
               :c,
               :d
 
-  def initialize(date_string = format(Time.now))
-    @master_offset = calculate_master_offset(date_string)
-    @a = @master_offset[0]
-    @b = @master_offset[1]
-    @c = @master_offset[2]
-    @d = @master_offset[3]
+  def initialize(date_seed)
+    date_seed ? @date_seed = date_seed : @date_seed = format(Time.now)
+    @seed = calculate_seed(@date_seed)
+    @a = @seed[0]
+    @b = @seed[1]
+    @c = @seed[2]
+    @d = @seed[3]
   end
   
   def format(date)
     date.strftime("%d%m%y")
   end
 
-  def calculate_master_offset(date_string)
-    (date_string.to_i**2).to_s[-4..-1]
+  def calculate_seed(date_seed)
+    (date_seed.to_i**2).to_s[-4..-1]
   end
   
   def digits

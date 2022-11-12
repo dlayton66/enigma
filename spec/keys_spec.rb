@@ -1,21 +1,21 @@
 require './lib/keys'
 
 RSpec.describe Keys do
-  let(:keys) { Keys.new }
+  let(:keys) { Keys.new(nil) }
 
   it 'exists' do
     expect(keys).to be_a Keys
   end
 
-  it 'generates a random 5-digit string master_key by default' do
-    expect(keys.master_key.size).to eq 5
-    expect(keys.master_key.class).to eq String
+  it 'generates a random 5-digit string seed with nil argument' do
+    expect(keys.seed.size).to eq 5
+    expect(keys.seed.class).to eq String
   end
   
-  it 'can accept a master_key argument' do
+  it 'can accept a seed argument' do
     keys_arg = Keys.new("02715")
 
-    expect(keys_arg.master_key).to eq "02715"
+    expect(keys_arg.seed).to eq "02715"
   end
 
   it 'contains four 2-digit keys' do

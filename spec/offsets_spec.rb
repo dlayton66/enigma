@@ -1,20 +1,20 @@
 require './lib/offsets'
 
 RSpec.describe Offsets do
-  let(:offsets) { Offsets.new }
+  let(:offsets) { Offsets.new(nil) }
   let(:offsets_arg) { Offsets.new("040895")}
   
   it 'exists' do
     expect(offsets).to be_a Offsets
   end
 
-  it 'generates a 4-digit string master_offset by default' do
-    expect(offsets.master_offset.size).to eq 4
-    expect(offsets.master_offset.class).to eq String
+  it 'generates a 4-digit string seed with nil argument' do
+    expect(offsets.seed.size).to eq 4
+    expect(offsets.seed.class).to eq String
   end
 
-  it 'can generate a master_offset with a date argument' do
-    expect(offsets_arg.master_offset).to eq "1025"
+  it 'can generate a seed with a date argument' do
+    expect(offsets_arg.seed).to eq "1025"
   end
 
   it 'contains four 1-digit offsets' do
@@ -32,10 +32,10 @@ RSpec.describe Offsets do
     end
   end
   
-  describe '#calculate_master_offset' do
-    it 'calculates master_offset from a date' do
-      expect(offsets.calculate_master_offset("040895")).to eq "1025"
-      expect(offsets.calculate_master_offset("311002")).to eq "4004"
+  describe '#calculate_seed' do
+    it 'calculates seed from date_seed' do
+      expect(offsets.calculate_seed("040895")).to eq "1025"
+      expect(offsets.calculate_seed("311002")).to eq "4004"
     end
   end
 
