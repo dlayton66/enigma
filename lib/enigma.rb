@@ -2,18 +2,20 @@ require './lib/shifts'
 
 class Enigma
   def initialize
-
+    @character_set = ("a".."z").to_a << " "
   end
 
   def encrypt(message,key = nil,date = nil)
     shifts = Shifts.new(key,date)
-    shifts.digits.map { |digit| digit % 27 }
-
-    alphabet = ("a".."z").to_a << " "
     
     test = message.chars.map.with_index do |char,i|
-      alphabet[(alphabet.index(char) + shifts.digits[i%4]) % 27]
+      @character_set[(@character_set.index(char) + shifts.digits[i%4]) % 27]
     end
-    require 'pry'; binding.pry
+    hash = {
+      date: shifts.date_seed,
+      encryption: test.join(""),
+      key: shifts.seed
+    }
+    hash
   end
 end

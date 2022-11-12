@@ -22,10 +22,17 @@ RSpec.describe Shifts do
 
   end
 
-  describe '#calculate_shifts' do
+  describe '#raw_shifts' do
     it 'returns an array with keys and offsets added together' do
-      expect(shifts.digits[1]).to eq(shifts.keys.digits[1]+shifts.offsets.digits[1])
-      expect(shifts.digits[3]).to eq(shifts.keys.digits[3]+shifts.offsets.digits[3])
+      expect(shifts.raw_shifts[1]).to eq(shifts.keys.digits[1]+shifts.offsets.digits[1])
+      expect(shifts.raw_shifts[3]).to eq(shifts.keys.digits[3]+shifts.offsets.digits[3])
+    end
+  end
+
+  describe '#digits' do
+    it 'is how many spaces we shift on our 27-character set' do
+      expect(shifts.raw_shifts[2] % 27).to eq shifts.digits[2]
+      expect(shifts.raw_shifts[3] % 27).to eq shifts.digits[3]
     end
   end
 end
