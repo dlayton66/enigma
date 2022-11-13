@@ -31,8 +31,8 @@ class Enigma
     encrypted_array(message).join("")
   end
 
-  def decrypt(ciphertext,key,date = nil)
-    @shifts = Shifts.new(key,date)
+  def decrypt(ciphertext, key, date = nil)
+    @shifts = Shifts.new(key, date)
 
     {
       decryption: decrypted_message(ciphertext),
@@ -53,5 +53,27 @@ class Enigma
 
   def decrypted_message(ciphertext)
     decrypted_array(ciphertext).join("")
+  end
+
+  def crack(ciphertext,date = Time.now.strftime("%d%m%y"))
+    last_four = ciphertext[-4..-1]
+    last_four_array = last_four.split("")
+    # last_four_array.
+    # 27, 5, 14, 4
+    last_four_array[0] = (@set.index(last_four_array[0]) - 26) % 27
+    last_four_array[1] = (@set.index(last_four_array[1]) - 4) % 27
+    last_four_array[2] = (@set.index(last_four_array[2]) - 13) % 27
+    last_four_array[3] = (@set.index(last_four_array[3]) - 3) % 27
+    
+    require 'pry'; binding.pry
+
+    offsets = Offsets.new(date)
+
+
+    last_four_array.map!.with_index do |num,i|
+      num - offsets.digits[i]
+    end
+require 'pry'; binding.pry
+
   end
 end

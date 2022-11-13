@@ -105,6 +105,8 @@ RSpec.describe 'Enigma' do
         key: "08304",
         date: "291018"
       }
+      # 14, 86, 32, 8
+      # => "vjqtbeaweqihssi"
       encryption = enigma.encrypt("hello world end","08304", "291018")[:encryption]
       expect(enigma.crack(encryption,"291018")).to eq(expected)
     end
@@ -117,7 +119,6 @@ RSpec.describe 'Enigma' do
         date: Time.now.strftime("%d%m%y")
       }
       encryption = enigma.encrypt("hello world end","08304")[:encryption]
-      
       expect(enigma.crack(encryption)).to eq(expected)
     end
   end
