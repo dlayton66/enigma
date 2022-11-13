@@ -11,12 +11,12 @@ class Enigma
     @shifts = Shifts.new(key,date)
 
     {
-      date: @date,
       encryption: encrypted_message(message.downcase),
-      key: @key
+      key: @key,
+      date: @date
     }
   end
-
+  
   def encrypted_array(message)
     message.chars.map.with_index do |char,i|
       if @set.include?(char)
@@ -26,8 +26,19 @@ class Enigma
       end
     end
   end
-
+  
   def encrypted_message(message)
     encrypted_array(message).join("")
   end
 end
+
+  def decrypt(ciphertext,key,date = nil)
+    @date = date
+    @shifts = Shifts.new(key,date)
+
+    {
+      decryption: decrypted_message(message),
+      key: key,
+      date: @date
+    }
+  end
