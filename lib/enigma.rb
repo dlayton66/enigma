@@ -56,24 +56,50 @@ class Enigma
   end
 
   def crack(ciphertext,date = Time.now.strftime("%d%m%y"))
-    last_four = ciphertext[-4..-1]
-    last_four_array = last_four.split("")
-    # last_four_array.
-    # 27, 5, 14, 4
-    last_four_array[0] = (@set.index(last_four_array[0]) - 26) % 27
-    last_four_array[1] = (@set.index(last_four_array[1]) - 4) % 27
-    last_four_array[2] = (@set.index(last_four_array[2]) - 13) % 27
-    last_four_array[3] = (@set.index(last_four_array[3]) - 3) % 27
-    
-    require 'pry'; binding.pry
-
+    last_four_array = ciphertext[-4..-1].split("")
+    last_four_array.map! { |char| @set.index(char)}
+    last_four_array = [last_four_array,[26,4,13,3]].transpose.map {|x| x.reduce(:-)}
+    last_four_array.map! { |num| num % 27}
+    last_four_array.rotate!(-ciphertext.size % 4)
     offsets = Offsets.new(date)
 
 
-    last_four_array.map!.with_index do |num,i|
-      num - offsets.digits[i]
+    last_four = [last_four_array,offsets.digits].transpose.map {|x| x.reduce(:-)}
+
+
+    for a in 0..3 do
+      for b in 0..3 do
+        for c in 0..3 do
+          for d in 0..3 do
+            if is_key?(jump(last_four,a,b,c,d))
+              p jump(last_four,a,b,c,d)
+            end
+          end
+        end
+      end
     end
-require 'pry'; binding.pry
 
   end
+
+  def jump(array,a,b,c,d)
+    [array[0] + a*27, array[1] + b*27, array[2] + c*27, array[3] + d*27]
+  end
+  
+  def is_key?(array)
+    array.map! { |num| num.to_s.rjust(2,"0") }
+    first_match?(array) && second_match?(array) && third_match?(array)
+  end
+
+  def first_match?(array)
+    array[0][1] == array[1][0]
+  end
+
+  def second_match?(array)
+    array[1][1] == array[2][0]
+  end
+
+  def third_match?(array)
+    array[2][1] == array[3][0]
+  end
+
 end
