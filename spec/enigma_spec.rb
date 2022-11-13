@@ -96,4 +96,17 @@ RSpec.describe 'Enigma' do
       expect(enigma.decrypted_message("keder ohulw")).to eq("hello world")
     end
   end
+
+  describe '#crack' do
+    it 'decrypts the message assuming it ends with " end"' do
+      expected =
+      {
+        decryption: "hello world end",
+        key: "08304",
+        date: "291018"
+      }
+      encryption = enigma.encrypt("hello world end", "08304", "291018")[:encryption]
+      expect(enigma.crack(encryption)).to eq(expected)
+    end
+  end
 end
