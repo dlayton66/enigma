@@ -32,7 +32,7 @@ RSpec.describe 'Enigma' do
   end
   
   describe '#encrypted_array' do
-    it 'returns an array where each element is an encrypted character' do
+    it 'encrypts message into an array of characters' do
       enigma.encrypt("hello world", "02715", "040895") # just to set seeds
       
       expected = ["k", "e", "d", "e", "r", " ", "o", "h", "u", "l", "w"]
@@ -54,7 +54,6 @@ RSpec.describe 'Enigma' do
       expect(enigma.encrypted_message("hello world")).to eq("keder ohulw")
     end
   end
-end
 
   describe '#decrypt' do
     it 'decrypts a message using a key and date' do
@@ -68,3 +67,13 @@ end
       expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq(expected)
     end
   end
+
+  describe '#decrypted_array' do
+    it 'decrypts ciphertext into an array of characters' do
+      enigma.decrypt("keder ohulw", "02715", "040895") # just to set seeds
+
+      expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
+      expect(enigma.decrypted_array("keder ohulw")).to eq(expected)
+    end
+  end
+end
