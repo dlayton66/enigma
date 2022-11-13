@@ -124,6 +124,13 @@ RSpec.describe 'Enigma' do
   end
 
   describe '#is_key?' do
-    it ''
+    it 'determines if an array of integers is eligible to be a key' do
+      expect(enigma.is_key?([8,83,30,4])).to be true
+      expect(enigma.is_key?([27,71,15,54])).to be true
+      expect(enigma.is_key?([0,0,0,0])).to be true
+
+      expect(enigma.is_key?([27,7,70,4])).to be false
+      expect(enigma.is_key?([58,89,9,94])).to be false
+    end
   end
 end

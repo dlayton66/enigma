@@ -74,14 +74,14 @@ class Enigma
       for b in 0..3 do
         for c in 0..3 do
           for d in 0..3 do
-            if is_key?(displace(last_four,a,b,c,d))
-              p displace(last_four,a,b,c,d)
+            displaced = displace(last_four,a,b,c,d)
+            if is_key?(displaced)
+              p displaced
             end
           end
         end
       end
     end
-
   end
 
   def displace(array,a,b,c,d)
@@ -90,5 +90,6 @@ class Enigma
   
   def is_key?(integers)
     strings = int_to_str(integers)
-    strings[0][1] == strings[1][0] && strings[1][1] == strings[2][0] && strings[2][1] == strings[3][0]
+    (strings[0][1] == strings[1][0]) && (strings[1][1] == strings[2][0]) && (strings[2][1] == strings[3][0])
   end
+end
