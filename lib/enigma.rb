@@ -1,8 +1,11 @@
 require './lib/shifts'
 require './lib/offsets'
 require './lib/keys'
+require_relative 'doable'
 
 class Enigma
+  include Doable
+
   def initialize
     @set = ("a".."z").to_a << " "
   end
@@ -71,8 +74,8 @@ class Enigma
       for b in 0..3 do
         for c in 0..3 do
           for d in 0..3 do
-            if is_key?(jump(last_four,a,b,c,d))
-              p jump(last_four,a,b,c,d)
+            if is_key?(displace(last_four,a,b,c,d))
+              p displace(last_four,a,b,c,d)
             end
           end
         end
@@ -81,25 +84,11 @@ class Enigma
 
   end
 
-  def jump(array,a,b,c,d)
+  def displace(array,a,b,c,d)
     [array[0] + a*27, array[1] + b*27, array[2] + c*27, array[3] + d*27]
   end
   
-  def is_key?(array)
-    array.map! { |num| num.to_s.rjust(2,"0") }
-    first_match?(array) && second_match?(array) && third_match?(array)
+  def is_key?(integers)
+    strings = int_to_str(integers)
+    strings[0][1] == strings[1][0] && strings[1][1] == strings[2][0] && strings[2][1] == strings[3][0]
   end
-
-  def first_match?(array)
-    array[0][1] == array[1][0]
-  end
-
-  def second_match?(array)
-    array[1][1] == array[2][0]
-  end
-
-  def third_match?(array)
-    array[2][1] == array[3][0]
-  end
-
-end
