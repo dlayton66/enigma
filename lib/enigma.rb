@@ -12,14 +12,18 @@ class Enigma
 
     {
       date: @date,
-      encryption: encrypted_message(message),
+      encryption: encrypted_message(message.downcase),
       key: @key
     }
   end
 
   def encrypted_array(message)
     message.chars.map.with_index do |char,i|
-      @set[(@set.index(char) + @shifts.digits[i%4]) % @set.size]
+      if @set.include?(char)
+        @set[(@set.index(char) + @shifts.digits[i%4]) % @set.size]
+      else
+        char
+      end
     end
   end
 
