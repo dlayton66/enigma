@@ -1,4 +1,6 @@
 require './lib/shifts'
+require './lib/offsets'
+require './lib/keys'
 
 class Enigma
   def initialize
@@ -10,8 +12,8 @@ class Enigma
 
     {
       encryption: encrypted_message(message.downcase),
-      key: key,
-      date: date
+      key: @shifts.keys.seed,
+      date: @shifts.offsets.date_seed
     }
   end
   
@@ -34,8 +36,8 @@ class Enigma
 
     {
       decryption: decrypted_message(ciphertext),
-      key: key,
-      date: date
+      key: @shifts.keys.seed,
+      date: @shifts.offsets.date_seed
     }
   end
 

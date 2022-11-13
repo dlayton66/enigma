@@ -66,6 +66,18 @@ RSpec.describe 'Enigma' do
 
       expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq(expected)
     end
+
+    it 'uses today as date seed by default' do
+      expected = 
+      {
+        decryption: "hello world",
+        key: "02715",
+        date: Time.now.strftime("%d%m%y")
+      }
+      encryption = enigma.encrypt("hello world", "02715")[:encryption]
+
+      expect(enigma.decrypt(encryption,"02715")).to eq(expected)
+    end
   end
 
   describe '#decrypted_array' do
