@@ -122,4 +122,8 @@ RSpec.describe 'Enigma' do
       expect(enigma.crack(encryption)).to eq(expected)
     end
   end
+
+  describe '#is_key?' do
+    it ''
+  end
 end
