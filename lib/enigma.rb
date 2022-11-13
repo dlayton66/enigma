@@ -6,14 +6,12 @@ class Enigma
   end
 
   def encrypt(message,key = nil,date = nil)
-    @key = key
-    @date = date
     @shifts = Shifts.new(key,date)
 
     {
       encryption: encrypted_message(message.downcase),
-      key: @key,
-      date: @date
+      key: key,
+      date: date
     }
   end
   
@@ -30,15 +28,28 @@ class Enigma
   def encrypted_message(message)
     encrypted_array(message).join("")
   end
-end
 
   def decrypt(ciphertext,key,date = nil)
-    @date = date
     @shifts = Shifts.new(key,date)
 
     {
-      decryption: decrypted_message(message),
+      decryption: decrypted_message(ciphertext),
       key: key,
-      date: @date
+      date: date
     }
   end
+
+  def decrypted_array(ciphertext)
+    ciphertext.chars.map.with_index do |char,i|
+      if @set.include?(char)
+        @set[(@set.index(char) - @shifts.digits[i%4]) % @set.size]
+      else
+        char
+      end
+    end
+  end
+
+  def decrypted_message(ciphertext)
+    decrypted_array(ciphertext).join("")
+  end
+end

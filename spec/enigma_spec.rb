@@ -76,4 +76,12 @@ RSpec.describe 'Enigma' do
       expect(enigma.decrypted_array("keder ohulw")).to eq(expected)
     end
   end
+
+  describe '#decrypted_message' do
+    it 'returns the decrypted message' do
+      enigma.decrypt("keder ohulw", "02715", "040895") # just to set seeds
+
+      expect(enigma.decrypted_message("keder ohulw")).to eq("hello world")
+    end
+  end
 end
