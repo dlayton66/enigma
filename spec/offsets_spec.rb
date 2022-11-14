@@ -8,14 +8,14 @@ RSpec.describe Offsets do
   end
 
   it 'generates a 4-digit string of offsets with nil argument' do
-    expect(offsets.all.size).to eq 4
-    expect(offsets.all.class).to eq String
+    expect(offsets.offsets_string.size).to eq 4
+    expect(offsets.offsets_string.class).to eq String
   end
 
   it 'can generate offsets with a date argument' do
     offsets_arg = Offsets.new("040895")
 
-    expect(offsets_arg.all).to eq "1025"
+    expect(offsets_arg.offsets_string).to eq "1025"
   end
 
   it 'contains four 1-digit integer offsets' do
@@ -39,19 +39,19 @@ RSpec.describe Offsets do
   end
   
   describe '#find_offsets' do
-    it 'calculates offsets from date' do
+    it 'calculates offsets key from date' do
       expect(offsets.find_offsets("040895")).to eq "1025"
       expect(offsets.find_offsets("311002")).to eq "4004"
     end
   end
 
-  # describe '#digits' do
-  #   it 'returns an array of offsets in integer form' do
-  #     expect(offsets.digits.class).to eq Array
-  #     expect(offsets.digits[0].class).to eq Integer
-  #     expect(offsets.digits[1].class).to eq Integer
-  #     expect(offsets.digits[2].class).to eq Integer
-  #     expect(offsets.digits[3].class).to eq Integer
-  #   end
-  # end
+  describe '#all' do
+    it 'returns an array of offsets in integer form' do
+      expect(offsets.all.class).to eq Array
+      expect(offsets.all[0].class).to eq Integer
+      expect(offsets.all[1].class).to eq Integer
+      expect(offsets.all[2].class).to eq Integer
+      expect(offsets.all[3].class).to eq Integer
+    end
+  end
 end

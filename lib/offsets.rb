@@ -1,6 +1,6 @@
 class Offsets
   attr_reader :date,
-              :all,
+              :offsets_string,
               :a,
               :b,
               :c,
@@ -8,11 +8,11 @@ class Offsets
 
   def initialize(date)
     date.nil? ? @date = format(Time.now) : @date = date
-    @all = find_offsets(@date)
-    @a = @all[0].to_i
-    @b = @all[1].to_i
-    @c = @all[2].to_i
-    @d = @all[3].to_i
+    @offsets_string = find_offsets(@date)
+    @a = @offsets_string[0].to_i
+    @b = @offsets_string[1].to_i
+    @c = @offsets_string[2].to_i
+    @d = @offsets_string[3].to_i
   end
   
   def format(date)
@@ -23,7 +23,7 @@ class Offsets
     (date.to_i**2).to_s[-4..-1]
   end
   
-  # def raw
-  #   [@a.to_i,@b.to_i,@c.to_i,@d.to_i]
-  # end
+  def all
+    [@a,@b,@c,@d]
+  end
 end
