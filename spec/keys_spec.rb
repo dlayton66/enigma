@@ -7,28 +7,22 @@ RSpec.describe Keys do
     expect(keys).to be_a Keys
   end
 
-  it 'generates a random 5-digit string seed with nil argument' do
-    expect(keys.seed.size).to eq 5
-    expect(keys.seed.class).to eq String
+  it 'generates a random 5-digit key all with nil argument' do
+    expect(keys.all.size).to eq 5
+    expect(keys.all.class).to eq String
   end
   
-  it 'can accept a seed argument' do
+  it 'can accept a key argument' do
     keys_arg = Keys.new("02715")
 
-    expect(keys_arg.seed).to eq "02715"
+    expect(keys_arg.all).to eq "02715"
   end
 
-  it 'contains four 2-digit keys' do
-    expect(keys.a.size).to eq 2
-    expect(keys.b.size).to eq 2
-    expect(keys.c.size).to eq 2
-    expect(keys.d.size).to eq 2
-  end
-
-  it 'has keys that share some digits' do
-    expect(keys.a[1]).to eq(keys.b[0])
-    expect(keys.b[1]).to eq(keys.c[0])
-    expect(keys.c[1]).to eq(keys.d[0])
+  it 'contains four 1-2 digit keys' do
+    expect(keys.a.to_s.size).to be_between(1,2)
+    expect(keys.b.to_s.size).to be_between(1,2)
+    expect(keys.c.to_s.size).to be_between(1,2)
+    expect(keys.d.to_s.size).to be_between(1,2)
   end
 
   describe '#format' do
@@ -39,13 +33,13 @@ RSpec.describe Keys do
     end
   end
 
-  describe '#digits' do
-    it 'returns an array of keys in integer form' do
-      expect(keys.digits.class).to eq Array
-      expect(keys.digits[0].class).to eq Integer
-      expect(keys.digits[1].class).to eq Integer
-      expect(keys.digits[2].class).to eq Integer
-      expect(keys.digits[3].class).to eq Integer
-    end
-  end
+  # describe '#digits' do
+  #   it 'returns an array of keys in integer form' do
+  #     expect(keys.to_s.class).to eq Array
+  #     expect(keys.to_s[0].class).to eq Integer
+  #     expect(keys.to_s[1].class).to eq Integer
+  #     expect(keys.to_s[2].class).to eq Integer
+  #     expect(keys.to_s[3].class).to eq Integer
+  #   end
+  # end
 end
