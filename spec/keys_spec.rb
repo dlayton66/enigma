@@ -8,14 +8,14 @@ RSpec.describe Keys do
   end
 
   it 'generates a random 5-digit key all with nil argument' do
-    expect(keys.all.size).to eq 5
-    expect(keys.all.class).to eq String
+    expect(keys.key.length).to eq 5
+    expect(keys.key.class).to eq String
   end
   
   it 'can accept a key argument' do
     keys_arg = Keys.new("02715")
 
-    expect(keys_arg.all).to eq "02715"
+    expect(keys_arg.key).to eq "02715"
   end
 
   it 'contains four 1-2 digit keys' do
@@ -33,13 +33,13 @@ RSpec.describe Keys do
     end
   end
 
-  # describe '#digits' do
-  #   it 'returns an array of keys in integer form' do
-  #     expect(keys.to_s.class).to eq Array
-  #     expect(keys.to_s[0].class).to eq Integer
-  #     expect(keys.to_s[1].class).to eq Integer
-  #     expect(keys.to_s[2].class).to eq Integer
-  #     expect(keys.to_s[3].class).to eq Integer
-  #   end
-  # end
+  describe '#all' do
+    it 'returns an array of keys' do
+      expect(keys.all.class).to eq Array
+      expect(keys.all[0].class).to eq Integer
+      expect(keys.all[1].class).to eq Integer
+      expect(keys.all[2].class).to eq Integer
+      expect(keys.all[3].class).to eq Integer
+    end
+  end
 end

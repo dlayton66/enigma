@@ -10,6 +10,12 @@ RSpec.describe Doable do
     end
   end
 
+  describe '#add' do
+    it 'adds corresponding elements from two arrays' do
+      expect(enigma.add([10,25,30,40],[8,7,28,12])).to eq([18,32,58,52])
+    end
+  end
+
   describe '#subtract' do
     it 'subtracts corresponding elements from two arrays' do
       expect(enigma.subtract([10,25,30,40],[8,7,28,12])).to eq([2,18,2,28])
