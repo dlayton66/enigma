@@ -64,7 +64,7 @@ class Enigma
     raw_shifts = get_raw_shifts(last_four_indices(ciphertext))
     raw_shifts.rotate!(-ciphertext.size % 4)
 
-    raw_keys = [raw_shifts,offsets.digits].transpose.map {|x| x.reduce(:-)}
+    raw_keys = subtract(raw_shifts,offsets.digits)
 
     key = find_key(raw_keys)
 
@@ -82,9 +82,7 @@ class Enigma
         for c in 0..3 do
           for d in 0..3 do
             displaced = displace(raw_keys,a,b,c,d)
-            if is_key?(displaced)
-              return displaced
-            end
+            return displaced if is_key?(displaced)
           end
         end
       end
@@ -92,7 +90,7 @@ class Enigma
   end
 
   def get_raw_shifts(last_four)
-    subtracted = [last_four,[26,4,13,3]].transpose.map {|x| x.reduce(:-)}
+    subtracted = subtract(last_four,[26,4,13,3])
     subtracted.map { |num| num % 27 }
   end
 
@@ -111,6 +109,7 @@ class Enigma
   
   def is_key?(integers)
     strings = int_to_str(integers)
+    
     (strings[0][1] == strings[1][0]) && 
     (strings[1][1] == strings[2][0]) && 
     (strings[2][1] == strings[3][0])
