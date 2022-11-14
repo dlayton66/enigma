@@ -123,6 +123,18 @@ RSpec.describe 'Enigma' do
     end
   end
 
+  describe '#get_char_indices' do
+    it 'converts an array of letters to an array of their indices' do
+      expect(enigma.get_char_indices(["h","s","s","i"])).to eq([7,18,18,8])
+    end
+  end
+
+  describe '#last_four_array' do
+    it 'returns an array of the last 4 characters in a string' do
+      expect(enigma.last_four_array("vjqtbeaweqihssi")).to eq(["h","s","s","i"])
+    end
+  end
+
   describe '#displace' do
     it 'displaces the values of an array by given multiples of 27' do
       expect(enigma.displace([8,2,3,4],0,3,1,0)).to eq([8,83,30,4])
