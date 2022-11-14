@@ -85,11 +85,18 @@ class Enigma
   end
 
   def displace(array,a,b,c,d)
-    [array[0] + a*27, array[1] + b*27, array[2] + c*27, array[3] + d*27]
+    [
+      array[0] + a*27, 
+      array[1] + b*27, 
+      array[2] + c*27,
+      array[3] + d*27
+    ]
   end
   
   def is_key?(integers)
     strings = int_to_str(integers)
-    (strings[0][1] == strings[1][0]) && (strings[1][1] == strings[2][0]) && (strings[2][1] == strings[3][0])
+    (strings[0][1] == strings[1][0]) && 
+    (strings[1][1] == strings[2][0]) && 
+    (strings[2][1] == strings[3][0])
   end
 end
