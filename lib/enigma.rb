@@ -61,9 +61,7 @@ class Enigma
   def crack(ciphertext,date = Time.now.strftime("%d%m%y"))
     offsets = Offsets.new(date)
 
-    raw_shifts = get_raw_shifts(last_four_indices(ciphertext))
-    raw_shifts.rotate!(-ciphertext.size % 4)
-
+    raw_shifts = last_four_shifts(last_four_indices(ciphertext)).rotate(-ciphertext.size % 4)
     raw_keys = subtract(raw_shifts,offsets.digits)
 
     key = find_key(raw_keys)
@@ -89,7 +87,7 @@ class Enigma
     end
   end
 
-  def get_raw_shifts(last_four)
+  def last_four_shifts(last_four)
     subtracted = subtract(last_four,[26,4,13,3])
     subtracted.map { |num| num % 27 }
   end

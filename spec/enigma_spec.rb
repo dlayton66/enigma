@@ -129,9 +129,9 @@ RSpec.describe 'Enigma' do
     end
   end
 
-  describe '#get_raw_shifts' do
+  describe '#last_four_shifts' do
     it 'returns how many indices the last four were shifted' do
-      expect(enigma.get_raw_shifts([7,18,18,8])).to eq([8,14,5,5])
+      expect(enigma.last_four_shifts([7,18,18,8])).to eq([8,14,5,5])
     end
   end
 
