@@ -123,8 +123,14 @@ RSpec.describe 'Enigma' do
     end
   end
 
+  describe '#find_key_array' do
+    it 'takes four raw key numbers and finds their 5-digit key' do
+      expect(enigma.find_key_array([8,2,3,4])).to eq([8,83,30,4])
+    end
+  end
+
   describe '#get_raw_shifts' do
-    it 'returns how many letters the last four have been shifted' do
+    it 'returns how many indices the last four were shifted' do
       expect(enigma.get_raw_shifts([7,18,18,8])).to eq([8,14,5,5])
     end
   end

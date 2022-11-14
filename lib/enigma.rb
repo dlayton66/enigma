@@ -61,23 +61,29 @@ class Enigma
   def crack(ciphertext,date = Time.now.strftime("%d%m%y"))
     offsets = Offsets.new(date)
 
-    last_four = last_four_indices(ciphertext) # [7,18,18,8]
-    get_raw_shifts(last_four)
+    raw_shifts = get_raw_shifts(last_four_indices(ciphertext))
+    raw_shifts.rotate!(-ciphertext.size % 4)
 
-    last_four_array.rotate!(-ciphertext.size % 4)
+    raw_keys = [raw_shifts,offsets.digits].transpose.map {|x| x.reduce(:-)}
 
+    key = find_key(raw_keys)
 
+    decrypt(ciphertext,key,date)
+  end
 
-    last_four = [last_four_array,offsets.digits].transpose.map {|x| x.reduce(:-)}
+  def find_key(raw_keys)
+    arr = int_to_str(find_key_array(raw_keys))
+    arr[0] + arr[2] + arr[3][1]
+  end
 
-
+  def find_key_array(raw_keys)
     for a in 0..3 do
       for b in 0..3 do
         for c in 0..3 do
           for d in 0..3 do
-            displaced = displace(last_four,a,b,c,d)
+            displaced = displace(raw_keys,a,b,c,d)
             if is_key?(displaced)
-              p displaced
+              return displaced
             end
           end
         end
@@ -86,7 +92,8 @@ class Enigma
   end
 
   def get_raw_shifts(last_four)
-    [last_four,[26,4,13,3]].transpose.map {|x| x.reduce(:-)}.map { |num| num % 27}
+    subtracted = [last_four,[26,4,13,3]].transpose.map {|x| x.reduce(:-)}
+    subtracted.map { |num| num % 27 }
   end
 
   def last_four_indices(string)
