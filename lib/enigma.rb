@@ -61,10 +61,9 @@ class Enigma
   def crack(ciphertext,date = Time.now.strftime("%d%m%y"))
     offsets = Offsets.new(date)
 
-    last_four_array(ciphertext) # ["h","s","s","i"]
-    last_four_array.map!  # [7,18,18,8]
-    last_four_array = [last_four_array,[26,4,13,3]].transpose.map {|x| x.reduce(:-)} # 
-    last_four_array.map! { |num| num % 27}
+    last_four = last_four_indices(ciphertext) # [7,18,18,8]
+    get_raw_shifts(last_four)
+
     last_four_array.rotate!(-ciphertext.size % 4)
 
 
@@ -86,12 +85,12 @@ class Enigma
     end
   end
 
-  def get_char_indices(array)
-    array.map { |char| @set.index(char) }
+  def get_raw_shifts(last_four)
+    [last_four,[26,4,13,3]].transpose.map {|x| x.reduce(:-)}.map { |num| num % 27}
   end
 
-  def last_four_array(string)
-    string[-4..-1].split("")
+  def last_four_indices(string)
+    string[-4..-1].split("").map { |char| @set.index(char) }
   end
 
   def displace(array,a,b,c,d)

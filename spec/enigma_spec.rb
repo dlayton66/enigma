@@ -123,15 +123,15 @@ RSpec.describe 'Enigma' do
     end
   end
 
-  describe '#get_char_indices' do
-    it 'converts an array of letters to an array of their indices' do
-      expect(enigma.get_char_indices(["h","s","s","i"])).to eq([7,18,18,8])
+  describe '#get_raw_shifts' do
+    it 'returns how many letters the last four have been shifted' do
+      expect(enigma.get_raw_shifts([7,18,18,8])).to eq([8,14,5,5])
     end
   end
 
-  describe '#last_four_array' do
-    it 'returns an array of the last 4 characters in a string' do
-      expect(enigma.last_four_array("vjqtbeaweqihssi")).to eq(["h","s","s","i"])
+  describe '#last_four_indices' do
+    it 'returns an array of the indices of the last 4 characters' do
+      expect(enigma.last_four_indices("vjqtbeaweqihssi")).to eq([7,18,18,8])
     end
   end
 
