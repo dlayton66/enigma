@@ -1,4 +1,8 @@
+require_relative 'arrable'
+
 class Offsets
+  include Arrable
+
   attr_reader :date,
               :offsets_string,
               :a,
@@ -21,9 +25,5 @@ class Offsets
 
   def find_offsets(date)
     (date.to_i**2).to_s[-4..-1]
-  end
-  
-  def all
-    [@a,@b,@c,@d]
   end
 end

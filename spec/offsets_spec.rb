@@ -39,7 +39,7 @@ RSpec.describe Offsets do
   end
   
   describe '#find_offsets' do
-    it 'calculates offsets key from date' do
+    it 'calculates a string of offsets from date' do
       expect(offsets.find_offsets("040895")).to eq "1025"
       expect(offsets.find_offsets("311002")).to eq "4004"
     end
