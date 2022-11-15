@@ -1,23 +1,25 @@
 require './lib/enigma'
 require './lib/keys'
 require './lib/offsets'
+require_relative 'doable'
 
 class Shifts
-  attr_reader :keys, :offsets, :seed, :date_seed
+  include Doable
 
-  def initialize(seed,date_seed)
-    @seed = seed
-    @date_seed = date_seed
-    @keys = Keys.new(@seed)
-    @offsets = Offsets.new(@date_seed)
+  attr_reader :key, :date, :keys, :offsets
+
+  def initialize(key,date)
+    @key = key
+    @date = date
+    @keys = Keys.new(@key)
+    @offsets = Offsets.new(@date)
+  end
+
+  def all
+    add(@keys.all,@offsets.all)
   end
 
   def raw_shifts
-    [@keys.digits,@offsets.digits].transpose.map {|x| x.reduce(:+)}
-  end
-
-  def digits
-    # require 'pry'; binding.pry
-    raw_shifts.map { |digit| digit % 27 }
+    all.map { |digit| digit % 27 }
   end
 end
