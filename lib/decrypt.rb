@@ -2,8 +2,6 @@ require './lib/enigma'
 
 enigma = Enigma.new
 
-ARGV == ["encrypted.txt","decrypted.txt","key","date"]
-
 encrypted = File.open("./lib/" + ARGV[0])
 decrypted = enigma.decrypt(encrypted.read,ARGV[2],ARGV[3])
 
