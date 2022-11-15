@@ -1,8 +1,9 @@
 require './lib/enigma'
 
+enigma = Enigma.new
+
 ARGV == ["message.txt","encrypted.txt"]
 
-enigma = Enigma.new
 message = File.open("./lib/" + ARGV[0])
 encrypted = enigma.encrypt(message.read)
 
