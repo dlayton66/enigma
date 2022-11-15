@@ -87,6 +87,13 @@ RSpec.describe 'Enigma' do
       expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
       expect(enigma.decrypted_array("keder ohulw")).to eq(expected)
     end
+
+    it 'leaves characters outside the set untouched' do
+      enigma.decrypt("keder ohulw", "02715", "040895") # just to set seeds
+
+      expected = ["h", "@", "e", "l", "%", "l", "o", " ", "!", "w", "o", "r", "#", "l", "d"]
+      expect(enigma.decrypted_array('k@xe%lgt!wgk#lw')).to eq(expected)
+    end
   end
 
   describe '#decrypted_message' do
