@@ -24,8 +24,8 @@ RSpec.describe Shifts do
 
   describe '#all' do
     it 'returns an array with keys and offsets added together' do
-      expect(shifts.all[1]).to eq(shifts.keys.digits[1]+shifts.offsets.digits[1])
-      expect(shifts.all[3]).to eq(shifts.keys.digits[3]+shifts.offsets.digits[3])
+      expect(shifts.all[1]).to eq(shifts.keys.all[1]+shifts.offsets.all[1])
+      expect(shifts.all[3]).to eq(shifts.keys.all[3]+shifts.offsets.all[3])
     end
   end
 

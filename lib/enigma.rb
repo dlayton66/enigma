@@ -15,15 +15,15 @@ class Enigma
 
     {
       encryption: encrypted_message(message.downcase),
-      key: @shifts.keys.seed,
-      date: @shifts.offsets.date_seed
+      key: @shifts.keys.key,
+      date: @shifts.offsets.date
     }
   end
   
   def encrypted_array(message)
     message.chars.map.with_index do |char,i|
       if @set.include?(char)
-        @set[(@set.index(char) + @shifts.digits[i%4]) % @set.size]
+        @set[(@set.index(char) + @shifts.all[i%4]) % @set.size]
       else
         char
       end
@@ -39,15 +39,15 @@ class Enigma
 
     {
       decryption: decrypted_message(ciphertext),
-      key: @shifts.keys.seed,
-      date: @shifts.offsets.date_seed
+      key: @shifts.keys.key,
+      date: @shifts.offsets.date
     }
   end
 
   def decrypted_array(ciphertext)
     ciphertext.chars.map.with_index do |char,i|
       if @set.include?(char)
-        @set[(@set.index(char) - @shifts.digits[i%4]) % @set.size]
+        @set[(@set.index(char) - @shifts.all[i%4]) % @set.size]
       else
         char
       end
@@ -62,7 +62,7 @@ class Enigma
     offsets = Offsets.new(date)
 
     raw_shifts = last_four_shifts(last_four_indices(ciphertext)).rotate(-ciphertext.size % 4)
-    raw_keys = subtract(raw_shifts,offsets.digits)
+    raw_keys = subtract(raw_shifts,offsets.all)
 
     key = find_key(raw_keys)
 

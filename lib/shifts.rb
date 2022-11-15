@@ -6,7 +6,7 @@ require_relative 'doable'
 class Shifts
   include Doable
 
-  attr_reader :keys, :offsets, :key, :date
+  attr_reader :key, :date, :keys, :offsets
 
   def initialize(key,date)
     @key = key
@@ -16,7 +16,7 @@ class Shifts
   end
 
   def all
-    add(@keys.all.split(""),@offsets.all.split(""))
+    add(@keys.all,@offsets.all)
   end
 
   def raw_shifts
