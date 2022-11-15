@@ -34,7 +34,7 @@ RSpec.describe Keys do
   end
 
   describe '#all' do
-    it 'returns an array of keys' do
+    it 'returns an array of keys in integer form' do
       expect(keys.all.class).to eq Array
       expect(keys.all[0].class).to eq Integer
       expect(keys.all[1].class).to eq Integer

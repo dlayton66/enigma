@@ -21,4 +21,6 @@ RSpec.describe Arrable do
       expect(enigma.subtract([10,25,30,40],[8,7,28,12])).to eq([2,18,2,28])
     end
   end
+
+  # tests for #all in keys_spec and offsets_spec
 end
