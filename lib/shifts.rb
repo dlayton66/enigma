@@ -1,22 +1,20 @@
-require './lib/enigma'
 require './lib/keys'
 require './lib/offsets'
-require_relative 'doable'
+require_relative 'arrable'
 
 class Shifts
-  include Doable
+  include Arrable
 
-  attr_reader :key, :date, :keys, :offsets
+  attr_reader :keys, 
+              :offsets
 
   def initialize(key,date)
-    @key = key
-    @date = date
-    @keys = Keys.new(@key)
-    @offsets = Offsets.new(@date)
-  end
-
-  def all
-    add(@keys.all,@offsets.all)
+    @keys = Keys.new(key)
+    @offsets = Offsets.new(date)
+    @a = @keys.a + @offsets.a
+    @b = @keys.b + @offsets.b
+    @c = @keys.c + @offsets.c
+    @d = @keys.d + @offsets.d
   end
 
   def raw_shifts

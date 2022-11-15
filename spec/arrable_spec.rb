@@ -1,7 +1,7 @@
-require './lib/doable'
+require './lib/arrable'
 require './lib/enigma'
 
-RSpec.describe Doable do
+RSpec.describe Arrable do
   let(:enigma) { Enigma.new }
 
   describe '#int_to_str' do

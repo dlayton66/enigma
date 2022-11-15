@@ -9,17 +9,18 @@ RSpec.describe Shifts do
 
   it 'can take 2 arguments for key and date' do
     shifts1 = Shifts.new("02715","040895")
-    expect(shifts1.key).to eq "02715"
-    expect(shifts1.date).to eq "040895"
+    expect(shifts1.keys.key).to eq "02715"
+    expect(shifts1.offsets.date).to eq "040895"
+  end
 
+  it 'passes nil arguments through to Keys and Offsets' do
     shifts2 = Shifts.new(nil,"040895")
-    expect(shifts2.key).to be nil
-    expect(shifts2.date).to eq "040895"
+    expect(shifts2.keys.key).to be_a String
+    expect(shifts2.offsets.date).to eq "040895"
 
     shifts3 = Shifts.new("02715",nil)
-    expect(shifts3.key).to eq "02715"
-    expect(shifts3.date).to be nil
-
+    expect(shifts3.keys.key).to eq "02715"
+    expect(shifts3.offsets.date).to be_a String
   end
 
   describe '#all' do

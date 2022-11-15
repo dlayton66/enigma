@@ -1,4 +1,8 @@
+require_relative 'arrable'
+
 class Keys
+  include Arrable
+
   attr_reader :key,
               :a,
               :b,
@@ -15,9 +19,5 @@ class Keys
 
   def format(num)
     num.to_s.rjust(5,"0")
-  end
-  
-  def all
-    [@a,@b,@c,@d]
   end
 end

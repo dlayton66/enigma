@@ -1,10 +1,10 @@
 require './lib/shifts'
 require './lib/offsets'
 require './lib/keys'
-require_relative 'doable'
+require_relative 'arrable'
 
 class Enigma
-  include Doable
+  include Arrable
 
   def initialize
     @set = ("a".."z").to_a << " "
@@ -75,11 +75,11 @@ class Enigma
   end
 
   def find_key_array(raw_keys)
-    for a in 0..3 do
-      for b in 0..3 do
-        for c in 0..3 do
-          for d in 0..3 do
-            displaced = displace(raw_keys,a,b,c,d)
+    for w in 0..3 do
+      for x in 0..3 do
+        for y in 0..3 do
+          for z in 0..3 do
+            displaced = displace(raw_keys,w,x,y,z)
             return displaced if is_key?(displaced)
           end
         end
@@ -96,12 +96,12 @@ class Enigma
     string[-4..-1].split("").map { |char| @set.index(char) }
   end
 
-  def displace(array,a,b,c,d)
+  def displace(array,w,x,y,z)
     [
-      array[0] + a*27, 
-      array[1] + b*27, 
-      array[2] + c*27,
-      array[3] + d*27
+      array[0] + w*27, 
+      array[1] + x*27, 
+      array[2] + y*27,
+      array[3] + z*27
     ]
   end
   
